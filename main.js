@@ -9,7 +9,7 @@ const addButton = document.querySelector("button.add-todo");
 const clearButton = document.querySelector("button.clear-todos");
 
 //FUNCTION IS GIVEN TODO OBJECT AND APPENDS TO TODO LIST
-//============FUNCTIONS================
+//============FUNCTIONS=================
 const addTodo = (todoObject) => {
   todos.push(todoObject);
 };
@@ -23,16 +23,16 @@ const removeTodo = (index) => {
 const printTodo = (todo) => {
   //CREATES LI TO APPEND
   const li = document.createElement("li");
-  //SET LI 
+  //SETS LI 
   li.innerText = todo.text;
   li.classList.add("todo-item");
-  //GIBES ID TO PUSH TO OBJECT
+  //GIvES ID TO PUSH TODO OBJECT
   li.id = todo.id;
   //FOR FUTURE USE - WILL ADD IS COMPLETE
   if (todo.complete === true) {
     li.classList.add("complete");
   }
-  //ACQUIRE TO APPEND OL TO APPEND LI
+  //ACQUIRE TO APPEND LI TO APPEND OL
   const ol = document.querySelector("ol.todo-list");
   ol.appendChild(li);
 };
@@ -61,4 +61,22 @@ const refresh = () => {
 
 //EVENT LISTENERS
 //ADD BUTTON
+addButton.addEventListener("click", (event) => {
+  const input = document.querySelector("input.todo-input");
+  const todoObject = {
+    text: input.value,
+    complete: false,
+    priority: 2,
+    id: id,
+  };
+  id++;
+  addTodo(todoObject);
+  refresh();
+});
 
+//CLEAR BUTTON
+clearButton.addEventListener("click", (event) => {
+  // OR todos.length = 0;
+  todos.splice(0);
+  refresh();
+});
